@@ -1,8 +1,15 @@
 from django.shortcuts import render
-
+from .models import *
 
 def Home(request):
-    return render(request, 'home.html')
+    categories = Categories.objects.all()
+    products = Product.objects.all().order_by('-id')[0:20]
+    context = {
+        'categories':categories,
+        'products':products
+    }
+
+    return render(request, 'home.html', context)
 
 
 def AboutUs(request):
