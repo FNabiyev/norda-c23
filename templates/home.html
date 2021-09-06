@@ -4,38 +4,24 @@
         <div class="slider-area pt-25">
             <div class="container">
                 <div class="hero-slider-active-2 nav-style-1 nav-style-1-modify nav-style-1-blue bg-gray-7">
+                    {% for b in banners %}
                     <div class="single-hero-slider slider-height-3 custom-d-flex custom-align-item-center single-animation-wrap">
                         <div class="row align-items-center slider-animated-1">
                             <div class="col-lg-6 col-md-6 col-12 col-sm-6">
                                 <div class="hero-slider-content-5">
-                                    <h5 class="animated">Best Seller</h5>
-                                    <h1 class="animated">Norda QLED <br>TV 43 Inch</h1>
-                                    <p class="animated">Discover our collection with leather simple backpacks. Less is more never out trend.</p>
+                                    <h5 class="animated">{{ b.index }}</h5>
+                                    <h1 class="animated">{{ b.title }}</h1>
+                                    <p class="animated">{{ b.text }}</p>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-12 col-sm-6">
                                 <div class="hm7-hero-slider-img">
-                                    <img class="animated" src="{% static 'assets/images/slider/hm-7-slider-1.png'%}" alt="">
+                                    <img class="animated" src="{{ b.photo.url }}" alt="">
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="single-hero-slider slider-height-3 custom-d-flex custom-align-item-center single-animation-wrap">
-                        <div class="row align-items-center slider-animated-1">
-                            <div class="col-lg-6 col-md-6 col-12 col-sm-6">
-                                <div class="hero-slider-content-5">
-                                    <h5 class="animated">Best Seller</h5>
-                                    <h1 class="animated">Norda QLED <br>TV 43 Inch</h1>
-                                    <p class="animated">Discover our collection with leather simple backpacks. Less is more never out trend.</p>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-12 col-sm-6">
-                                <div class="hm7-hero-slider-img">
-                                    <img class="animated" src="{% static 'assets/images/slider/hm-7-slider-1.png'%}" alt="">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
@@ -54,7 +40,7 @@
                         <div class="product-plr-1">
                             <div class="single-product-wrap">
                                 <div class="product-img product-img-border border-blue mb-20">
-                                    <a href="shop.html">
+                                    <a href="/kategoriya/{{ c.id }}/">
                                         <img src="{{ c.photo.url }}" alt="">
                                     </a>
                                 </div>

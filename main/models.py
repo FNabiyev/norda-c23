@@ -17,3 +17,13 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Banner(models.Model):
+    index = models.CharField(max_length=30)
+    title = models.CharField(max_length=30)
+    text = models.TextField()
+    photo = models.ImageField(upload_to='banner')
+
+    def __str__(self):
+        return self.title
