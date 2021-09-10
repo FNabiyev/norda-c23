@@ -78,8 +78,8 @@
                                     </div>
                                     <div class="same-style-2 same-style-2-white same-style-2-font-inc header-cart">
                                         <a class="cart-active" href="#">
-                                            <i class="icon-basket-loaded"></i><span class="pro-count black">02</span>
-                                            <span class="cart-amount light-yellow">$2,435.30</span>
+                                            <i class="icon-basket-loaded"></i><span class="pro-count black" id="count">0</span>
+                                            <span class="cart-amount light-yellow" id="total">0</span>
                                         </a>
                                     </div>
                                 </div>
@@ -179,37 +179,31 @@
                 <div class="cart-content">
                     <h3>Shopping Cart</h3>
                     <ul>
+                        {% for s in shopitems %}
                         <li class="single-product-cart">
                             <div class="cart-img">
                                 <a href="#"><img src="{% static 'assets/images/cart/cart-1.jpg'%}" alt=""></a>
                             </div>
                             <div class="cart-title">
-                                <h4><a href="#">Simple Black T-Shirt</a></h4>
-                                <span> 1 × $49.00	</span>
+                                <h4><a href="#">{{ s.product.name }}</a></h4>
+                                {% if s.product.discount %}
+                                <span> 1 × {{ s.product.discount }}</span>
+                                {% else %}
+                                <span> 1 × {{ s.product.price }}</span>
+                                {% endif %}
                             </div>
                             <div class="cart-delete">
-                                <a href="#">×</a>
+                                <a href="/deletecart/{{ s.id }}">×</a>
                             </div>
                         </li>
-                        <li class="single-product-cart">
-                            <div class="cart-img">
-                                <a href="#"><img src="{% static 'assets/images/cart/cart-2.jpg'%}" alt=""></a>
-                            </div>
-                            <div class="cart-title">
-                                <h4><a href="#">Norda Backpack</a></h4>
-                                <span> 1 × $49.00	</span>
-                            </div>
-                            <div class="cart-delete">
-                                <a href="#">×</a>
-                            </div>
-                        </li>
+                        {% endfor %}
                     </ul>
                     <div class="cart-total">
-                        <h4>Subtotal: <span>$170.00</span></h4>
+                        <h4>Subtotal: <span id="subtotal">0</span></h4>
                     </div>
                     <div class="cart-checkout-btn">
-                        <a class="btn-hover cart-btn-style" href="/cart/">view cart</a>
-                        <a class="no-mrg btn-hover cart-btn-style" href="checkout.html">checkout</a>
+                        <a class="btn-hover cart-btn-style" href="/cart/">Savatcha</a>
+                        <a class="no-mrg btn-hover cart-btn-style" href="/buyurtmaberish/">Buyurtma berish</a>
                     </div>
                 </div>
             </div>
@@ -471,6 +465,24 @@
 <script src="{% static 'assets/js/plugins/plugins.min.js'%}"></script>  -->
     <!-- Main JS -->
     <script src="{% static 'assets/js/main.js'%}"></script>
+
+    <script>
+        $(function(){
+            $.ajax({
+                type:'get',
+               url:"/count-savatcha/",
+                    success:function(data){
+                        let count = data['count'];
+                        let total = data['total'];
+                        console.log(count, total)
+                        $("#count").text(count);
+                        $("#total").text(total);
+                        $("#subtotal").text(total);
+
+                    }
+                });
+        });
+    </script>
 
 </body>
 

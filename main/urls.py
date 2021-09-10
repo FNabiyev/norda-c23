@@ -8,4 +8,8 @@ urlpatterns = [
     path('blog/', Blog),
     path('contact/', Contact),
     path('cart/', Cart),
+    path('addtocart/<int:id>/', AddToCart),
+    path('count-savatcha/', CountSavatcha),
+    path('buyurtmaberish/', BuyurtmaBerish),
+    path('deletecart/<int:id>/', DeleteCart)
 ]
